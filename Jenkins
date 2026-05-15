@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                url: 'https://github.com/shree270398/sample001.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'javac Demo.java'
+            }
+        }
+
+        stage('Run') {
+            steps {
+                sh 'java Demo'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline Success'
+        }
+
+        failure {
+            echo 'Pipeline Failed'
+        }
+    }
+}
